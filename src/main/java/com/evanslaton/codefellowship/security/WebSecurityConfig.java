@@ -11,37 +11,39 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-    @Configuration
-    @EnableWebSecurity
-    public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-        // We'll comment in these lines tomorrow, when we add a UserDetailsServiceImpl!
-        // @Autowired
-        // private UserDetailsServiceImpl userDetailsService;
+    // We'll comment in these lines tomorrow, when we add a UserDetailsServiceImpl!
+    // @Autowired
+    // private UserDetailsServiceImpl userDetailsService;
 
-        @Bean
-        public BCryptPasswordEncoder passwordEncoder() {
-            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            return bCryptPasswordEncoder;
-        }
+    // Hashes passwords
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
+    }
 
-        @Override
-        protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-            auth.inMemoryAuthentication()
-                    .withUser("user1").password(passwordEncoder().encode("user1Pass")).roles("USER")
-                    .and()
-                    .withUser("user2").password(passwordEncoder().encode("user2Pass")).roles("USER")
-                    .and()
-                    .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
-        }
+    // Sets up fake users for testing
+    @Override
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("user1").password(passwordEncoder().encode("user1Pass")).roles("USER")
+                .and()
+                .withUser("user2").password(passwordEncoder().encode("user2Pass")).roles("USER")
+                .and()
+                .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
+    }
 
-        @Override
-        protected void configure(final HttpSecurity http) throws Exception {
-            http
-                    .cors().disable()
-                    .csrf().disable()
-                    .authorizeRequests()
-                    .antMatchers("/*").permitAll();
-        }
+    // Sets up how we want the different requests to be authorized
+    @Override
+    protected void configure(final HttpSecurity http) throws Exception {
+        http
+                .cors().disable()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/*").permitAll();
     }
 }
