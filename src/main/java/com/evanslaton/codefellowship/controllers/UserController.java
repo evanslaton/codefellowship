@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 public class UserController {
@@ -44,11 +42,15 @@ public class UserController {
                                    Model userModel) {
         ApplicationUser newUser = new ApplicationUser(firstName, lastName, dateOfBirth, bio, username, bCryptPasswordEncoder.encode(password));
         applicationUserRepo.save(newUser);
-        return new RedirectView("/profile");
+        return new RedirectView("/profile/" + newUser.id);
     }
 
-    @RequestMapping(value="/profile", method= RequestMethod.GET)
-    public String viewProfile() {
+    @RequestMapping(value="/profile/{userId}", method= RequestMethod.GET)
+    public String viewProfile(@PathVariable long userId,
+                              Model userModel) {
+        userModel.addAttribute("user", applicationUserRepo.findById(userId).get());
         return "profile";
     }
 }
+
+//albumModel.addAttribute("album", albumRepo.findById(albumId).get());
