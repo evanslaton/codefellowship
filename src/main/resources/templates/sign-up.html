@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auth and Auth</title>
+</head>
+<body>
+    <form method="POST" action="/perform-signup" >
+        <input type="text" name="firstName" placeholder="First Name" />
+        <input type="text" name="lastName" placeholder="Last Name" />
+        <input type="test" name="dateOfBirth" placeholder="Date of Birth (mm/dd/yyyy)" />
+        <input type="textarea" name="bio" placeholder="Bio" />
+        <input type="text" name="username" placeholder="Username" />
+        <input type="password" name="password" placeholder="Password" />
+        <input type="submit" />
+    </form>
+</body>
+</html>
+
+
+username, password (will be hashed using BCrypt), firstName, lastName, dateOfBirth, bio
