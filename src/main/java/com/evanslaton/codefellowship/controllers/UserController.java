@@ -52,5 +52,3 @@ public class UserController {
         return "profile";
     }
 }
-
-//albumModel.addAttribute("album", albumRepo.findById(albumId).get());
