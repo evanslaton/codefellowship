@@ -1,6 +1,6 @@
 package com.evanslaton.codefellowship;
 
-import com.evanslaton.codefellowship.controllers.UserController;
+import com.evanslaton.codefellowship.applicationuser.UserController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +32,4 @@ public class CodefellowshipApplicationTests {
 	public void testDefaultMessage() throws Exception {
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/", String.class)).contains("Basic Information");
 	}
-
 }
