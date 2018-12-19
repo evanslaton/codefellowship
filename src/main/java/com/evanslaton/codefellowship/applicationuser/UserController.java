@@ -27,7 +27,10 @@ public class UserController {
 
     // Serves the home page
     @RequestMapping(value="/", method= RequestMethod.GET)
-    public String showHomePage() {
+    public String showHomePage(Principal principal, Model userModel) {
+        if (principal != null) {
+            userModel.addAttribute("user", principal);
+        }
         return "index";
     }
 
@@ -54,7 +57,7 @@ public class UserController {
         // Auto logins new users so they don't have to login in immediately after creating an account
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new RedirectView("/profile/" + newUser.id);
+        return new RedirectView("/myprofile");
     }
 
     // Serves login page
@@ -66,11 +69,11 @@ public class UserController {
     // Serves users their profile page
     @RequestMapping(value="/myprofile", method= RequestMethod.GET)
     public String showMyProfile(Principal principal, Model userModel) {
-        userModel.addAttribute("user", principal);
+        userModel.addAttribute("user", ((UsernamePasswordAuthenticationToken) principal).getPrincipal());
         return "profile";
     }
 
-    // Serves a users their profile page
+//     Serves a users their profile page
 //    @RequestMapping(value="/profile/{userId}", method= RequestMethod.GET)
 //    public String viewProfile(@PathVariable long userId,
 //                              Model userModel) {
