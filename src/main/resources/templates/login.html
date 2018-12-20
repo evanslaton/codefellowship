@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Auth and Auth</title>
+    <div th:replace="~{common :: head}"></div>
 </head>
 <body>
-    <form action="/perform_login" method="POST">
-        <input type="text" name="username" placeholder="username" />
-        <input type="password" name="password" placeholder="password" />
-        <input type="submit" />
-    </form>
+    <div th:replace="~{common :: header}"></div>
+    <div class="container">
+        <form action="/perform_login" method="POST">
+            <input type="text" name="username" placeholder="username" />
+            <input type="password" name="password" placeholder="password" />
+            <input type="submit" />
+        </form>
+    </div>
 </body>
 </html>

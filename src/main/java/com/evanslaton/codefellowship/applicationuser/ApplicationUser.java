@@ -1,13 +1,11 @@
 package com.evanslaton.codefellowship.applicationuser;
 
+import com.evanslaton.codefellowship.posts.Post;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Collection;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -23,8 +21,11 @@ public class ApplicationUser implements UserDetails {
     public String username;
     public String password;
 
+    @OneToMany(mappedBy="applicationUser")
+    public List<Post> posts;
+
     // Generic Constructor
-    ApplicationUser() {};
+    ApplicationUser() {}
 
     // Constructor
     public ApplicationUser(String firstName, String lastName, String dateOfBirth, String bio, String username, String password) {

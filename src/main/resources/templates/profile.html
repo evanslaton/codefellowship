@@ -5,8 +5,27 @@
     <div th:replace="~{common :: head}"></div>
 </head>
 <body>
-    <h1 th:text="${user.firstName}"></h1>
-    <img src="https://vignette.wikia.nocookie.net/uncyclopedia/images/1/12/Fluffy.jpg/revision/latest?cb=20090216235739" alt="Fluffy Destroyer of Worlds" />
-    <p th:text="${user.bio}"></p>
+    <div th:replace="~{common :: header}"></div>
+    <div class="container">
+        <h1 th:text="${user.firstName + ' ' + user.lastName}"></h1>
+        <p th:text="${'@' + user.username}"></p>
+        <img src="https://vignette.wikia.nocookie.net/uncyclopedia/images/1/12/Fluffy.jpg/revision/latest?cb=20090216235739" alt="Fluffy Destroyer of Worlds" />
+        <p th:text="${user.bio}"></p>
+
+        <form action="/post" method="POST">
+            <label>What's on your mind?
+                <textarea name="body"></textarea>
+            </label>
+            <input type="submit" />
+        </form>
+
+        <h3>Posts</h3>
+        <ul>
+            <li th:each="post : ${posts}">
+                <p th:text="${post.createdAt}"></p>
+                <p th:text="${post.body}"></p>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>

@@ -5,15 +5,18 @@
     <div th:replace="~{common :: head}"></div>
 </head>
 <body>
-    <form method="POST" action="/signup" >
-        <input type="text" name="firstName" placeholder="First Name" />
-        <input type="text" name="lastName" placeholder="Last Name" />
-        <input type="test" name="dateOfBirth" placeholder="Date of Birth (mm/dd/yyyy)" />
-        <input type="textarea" name="bio" placeholder="Bio" />
-        <input type="text" name="username" placeholder="Username" />
-        <input type="password" name="password" placeholder="Password" />
-        <input type="submit" />
-    </form>
+    <div th:replace="~{common :: header}"></div>
+    <div class="container">
+        <form method="POST" action="/signup" >
+            <input type="text" name="firstName" placeholder="First Name" />
+            <input type="text" name="lastName" placeholder="Last Name" />
+            <input type="test" name="dateOfBirth" placeholder="Date of Birth (mm/dd/yyyy)" />
+            <input type="textarea" name="bio" placeholder="Bio" />
+            <input type="text" name="username" placeholder="Username" />
+            <input type="password" name="password" placeholder="Password" />
+            <input type="submit" />
+        </form>
+    </div>
 </body>
 </html>
 
