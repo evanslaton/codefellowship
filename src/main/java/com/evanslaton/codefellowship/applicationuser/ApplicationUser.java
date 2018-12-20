@@ -24,6 +24,17 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy="applicationUser")
     public List<Post> posts;
 
+    @ManyToMany
+    @JoinTable(
+            name = "follower_followed",
+            joinColumns = {@JoinColumn(name = "follower_id")},
+            inverseJoinColumns = {@JoinColumn(name = "followed_id")}
+    )
+    public Set<ApplicationUser> following;
+
+    @ManyToMany(mappedBy = "following")
+            public Set<ApplicationUser> followedBy;
+
     // Generic Constructor
     ApplicationUser() {}
 

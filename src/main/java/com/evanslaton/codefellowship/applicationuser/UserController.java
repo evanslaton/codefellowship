@@ -29,18 +29,13 @@ public class UserController {
 
     // Serves the home page
     @RequestMapping(value="/", method= RequestMethod.GET)
-    public String showHomePage(Principal p, Model m) {
-//        if (p != null) {
-//            ApplicationUser currentUser = (ApplicationUser)((UsernamePasswordAuthenticationToken) p).getPrincipal();
-//            m.addAttribute("user", applicationUserRepo.findById(currentUser.id).get());
-//        }
+    public String showHomePage() {
         return "index";
     }
 
     // Serves the signup page
     @RequestMapping(value="/signup", method= RequestMethod.GET)
-    public String showSignUpPage(Principal p, Model m) {
-
+    public String showSignUpPage() {
         return "sign-up";
     }
 
