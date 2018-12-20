@@ -5,15 +5,15 @@
     <div th:replace="~{common :: head}"></div>
 </head>
 <body>
-    <h1>Basic Information</h1>
-    <a href="/myprofile">My Profile</a>
-    <p>Here is some basic information about this website:</p>
-    <ul>
-        <li>Some basic infomation</li>
-        <li>More basic infomation</li>
-        <li>Even more basic infomation</li>
-    </ul>
-
-    <a href="/signup">Click here to sign up</a>
+    <div th:replace="~{common :: header}"></div>
+    <div class="container text-center">
+        <h1 class="text-center">Friends: Don't just make them, amass them.</h1>
+        <a href="/myprofile">
+            <button class="btn btn-success">My Profile</button>
+        </a>
+        <a href="/signup">
+            <button class="btn btn-success">Sign Up</button>
+        </a>
+    </div>
 </body>
 </html>

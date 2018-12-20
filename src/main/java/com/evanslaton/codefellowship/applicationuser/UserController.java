@@ -1,5 +1,6 @@
 package com.evanslaton.codefellowship.applicationuser;
 
+import com.evanslaton.codefellowship.posts.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -27,18 +29,18 @@ public class UserController {
 
     // Serves the home page
     @RequestMapping(value="/", method= RequestMethod.GET)
-    public String showHomePage(Principal principal, Model userModel) {
-        if (principal != null) {
-            userModel.addAttribute("user", principal);
-        }
+    public String showHomePage(Principal p, Model m) {
+//        if (p != null) {
+//            ApplicationUser currentUser = (ApplicationUser)((UsernamePasswordAuthenticationToken) p).getPrincipal();
+//            m.addAttribute("user", applicationUserRepo.findById(currentUser.id).get());
+//        }
         return "index";
     }
 
     // Serves the signup page
     @RequestMapping(value="/signup", method= RequestMethod.GET)
-    public String showSignUpPage(Principal principal, Model userModel) {
-        ApplicationUser applicationUser = new ApplicationUser();
-        userModel.addAttribute("user", applicationUser);
+    public String showSignUpPage(Principal p, Model m) {
+
         return "sign-up";
     }
 
@@ -50,11 +52,11 @@ public class UserController {
                                    @RequestParam String bio,
                                    @RequestParam String username,
                                    @RequestParam String password,
-                                   Model userModel) {
+                                   Model m) {
         ApplicationUser newUser = new ApplicationUser(firstName, lastName, dateOfBirth, bio, username, bCryptPasswordEncoder.encode(password));
         applicationUserRepo.save(newUser);
 
-        // Auto logins new users so they don't have to login in immediately after creating an account
+        // Auto logins new users immediately after creating an account
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new RedirectView("/myprofile");
@@ -68,16 +70,21 @@ public class UserController {
 
     // Serves users their profile page
     @RequestMapping(value="/myprofile", method= RequestMethod.GET)
-    public String showMyProfile(Principal principal, Model userModel) {
-        userModel.addAttribute("user", ((UsernamePasswordAuthenticationToken) principal).getPrincipal());
+    public String showMyProfile(Principal p, Model m) {
+        ApplicationUser currentUser = (ApplicationUser)((UsernamePasswordAuthenticationToken) p).getPrincipal();
+
+        // Gets the current user's posts and if there are any, adds them to the model
+        List<Post> posts = applicationUserRepo.findById(currentUser.id).get().posts;
+        if (posts.size() > 0) {m.addAttribute("posts", posts);}
+        m.addAttribute("user", currentUser);
         return "profile";
     }
 
-//     Serves a users their profile page
-//    @RequestMapping(value="/profile/{userId}", method= RequestMethod.GET)
-//    public String viewProfile(@PathVariable long userId,
-//                              Model userModel) {
-//        userModel.addAttribute("user", applicationUserRepo.findById(userId).get());
-//        return "profile";
-//    }
+    // Serves the profile page of the user whose id = the userId path variable
+    @RequestMapping(value="/profile/{userId}", method= RequestMethod.GET)
+    public String viewProfile(@PathVariable long userId,
+                              Model m) {
+        m.addAttribute("user", applicationUserRepo.findById(userId).get());
+        return "profile";
+    }
 }
