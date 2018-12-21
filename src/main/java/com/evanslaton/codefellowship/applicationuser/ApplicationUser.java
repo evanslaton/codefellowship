@@ -88,4 +88,8 @@ public class ApplicationUser implements UserDetails {
     public String toString() {
         return this.firstName + " '" + this.username + "' " + this.lastName;
     }
+
+    public String getUserName() {
+        return this.username;
+    }
 }

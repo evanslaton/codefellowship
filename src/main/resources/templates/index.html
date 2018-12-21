@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Auth and Auth</title>
     <div th:replace="~{common :: head}"></div>
 </head>
 <body>
-    <div th:replace="~{common :: header}"></div>
+    <div th:replace="~{common :: header(${user})}"></div>
     <div class="container text-center">
         <h1 class="text-center">Friends: Don't just make them, amass them.</h1>
         <a href="/myprofile">
