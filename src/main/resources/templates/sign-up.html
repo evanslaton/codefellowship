@@ -5,20 +5,34 @@
     <div th:replace="~{common :: head}"></div>
 </head>
 <body>
-    <div th:replace="~{common :: header}"></div>
+    <div th:replace="~{common :: header(${user})}"></div>
     <div class="container">
         <form method="POST" action="/signup" >
-            <input type="text" name="firstName" placeholder="First Name" />
-            <input type="text" name="lastName" placeholder="Last Name" />
-            <input type="test" name="dateOfBirth" placeholder="Date of Birth (mm/dd/yyyy)" />
-            <input type="textarea" name="bio" placeholder="Bio" />
-            <input type="text" name="username" placeholder="Username" />
-            <input type="password" name="password" placeholder="Password" />
+            <label>First Name
+                <input type="text" name="firstName" placeholder="First Name" />
+            </label>
+
+            <label>Last Name
+                <input type="text" name="lastName" placeholder="Last Name" />
+            </label>
+
+            <label>Birthday
+                <input type="test" name="dateOfBirth" placeholder="Date of Birth (mm/dd/yyyy)" />
+            </label>
+
+            <label>Bio
+                <input type="textarea" name="bio" placeholder="Bio" />
+            </label>
+
+            <label>Username
+                <input type="text" name="username" placeholder="Username" />
+            </label>
+
+            <label>Password
+                <input type="password" name="password" placeholder="Password" />
+            </label>
             <input type="submit" />
         </form>
     </div>
 </body>
 </html>
-
-
-username, password (will be hashed using BCrypt), firstName, lastName, dateOfBirth, bio

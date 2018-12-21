@@ -30,17 +30,14 @@ public class UserController {
     // Serves the home page
     @RequestMapping(value="/", method= RequestMethod.GET)
     public String showHomePage(Principal p, Model m) {
-//        if (p != null) {
-//            ApplicationUser currentUser = (ApplicationUser)((UsernamePasswordAuthenticationToken) p).getPrincipal();
-//            m.addAttribute("user", applicationUserRepo.findById(currentUser.id).get());
-//        }
-        return "index";
+        getUsername(p, m);
+          return "index";
     }
 
     // Serves the signup page
     @RequestMapping(value="/signup", method= RequestMethod.GET)
     public String showSignUpPage(Principal p, Model m) {
-
+        getUsername(p, m);
         return "sign-up";
     }
 
@@ -64,7 +61,8 @@ public class UserController {
 
     // Serves login page
     @RequestMapping(value="/login", method= RequestMethod.GET)
-    public String login() {
+    public String login(Principal p, Model m) {
+        getUsername(p, m);
         return "login";
     }
 
@@ -87,4 +85,13 @@ public class UserController {
         m.addAttribute("user", applicationUserRepo.findById(userId).get());
         return "profile";
     }
+
+   public void getUsername(Principal p, Model m) {
+       if (p != null) {
+           ApplicationUser currentUser = (ApplicationUser)((UsernamePasswordAuthenticationToken) p).getPrincipal();
+           m.addAttribute("user", applicationUserRepo.findById(currentUser.id).get());
+       } else {
+           m.addAttribute("user", false);
+       }
+   }
 }

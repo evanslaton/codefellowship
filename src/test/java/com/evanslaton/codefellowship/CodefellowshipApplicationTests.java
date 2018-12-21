@@ -28,8 +28,15 @@ public class CodefellowshipApplicationTests {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
+	// Tests that the splash page isn't empty
 	@Test
-	public void testDefaultMessage() throws Exception {
-		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/", String.class)).contains("Basic Information");
+	public void testSplashPage() throws Exception {
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/", String.class)).contains("Friends: Don't just make them, amass them.");
+	}
+
+	// Tests that the sign up page isn't empty
+	@Test
+	public void testSignUpPage() throws Exception {
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/signup", String.class)).contains("First Name");
 	}
 }

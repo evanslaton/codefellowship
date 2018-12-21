@@ -12,6 +12,16 @@
 * The site should use reusable templates for its information. (At a minimum, it should have one Thymeleaf fragment that is used on multiple pages.)
 * The site should have a non-whitelabel error handling page that lets the user know, at minimum, the error code and a brief message about what went wrong.
 * The site should contain integration testing. At a minimum, there should be tests to ensure basic functionality for the splash page and the sign up page.
+* Users should be able to to log in to your app.
+    * Upon logging in, users should be taken to a /myprofile route that displays their information.
+    * Ensure that your homepage, login, and registration routes are accessible to non-logged in users. All other routes should be limited to logged-in users.
+    * When a user is logged in, the app should display the user’s username on every page
+    * Ensure that user registration also logs users into your app automatically.
+* Add a Post entity to your app.
+    * A Post has a body and a createdAt timestamp.
+    * A logged-in user should be able to create a Post, and a post should belong to the user that created it.
+    * A user’s posts should be visible on their profile page.
+
 
 ## Instructions
 * Clone repo from github: https://github.com/evanslaton/codefellowship
