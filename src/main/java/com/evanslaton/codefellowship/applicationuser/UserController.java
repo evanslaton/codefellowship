@@ -79,7 +79,7 @@ public class UserController {
     }
 
     // Serves the profile page of the user whose id = the userId path variable
-    @RequestMapping(value="/profile/{userId}", method= RequestMethod.GET)
+    @RequestMapping(value="/user/{userId}", method= RequestMethod.GET)
     public String viewProfile(@PathVariable long userId,
                               Model m) {
         m.addAttribute("user", applicationUserRepo.findById(userId).get());
