@@ -5,14 +5,17 @@
     <div th:replace="~{common :: head}"></div>
 </head>
 <body>
-    <div th:replace="~{common :: header(${user})}"></div>
+    <div th:replace="~{common :: header(${loggedInUser})}"></div>
     <div class="container">
         <h1 th:text="${user.firstName + ' ' + user.lastName}"></h1>
         <p th:text="${'@' + user.username}"></p>
+        <form th:action="${'/follow/' + user.id}" method="POST" th:if="${user.id != loggedInUser.id}">
+            <input type="submit" value="Follow" />
+        </form>
         <img src="https://vignette.wikia.nocookie.net/uncyclopedia/images/1/12/Fluffy.jpg/revision/latest?cb=20090216235739" alt="Fluffy Destroyer of Worlds" />
         <p th:text="${user.bio}"></p>
 
-        <form action="/post" method="POST">
+        <form action="/post" method="POST" th:if="${user.id == loggedInUser.id}">
             <label>What's on your mind?
                 <textarea name="body"></textarea>
             </label>
