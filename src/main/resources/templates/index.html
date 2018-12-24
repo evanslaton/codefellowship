@@ -5,7 +5,7 @@
     <div th:replace="~{common :: head}"></div>
 </head>
 <body>
-    <div th:replace="~{common :: header(${user})}"></div>
+    <div th:replace="~{common :: header(${loggedInUser})}"></div>
     <div class="container text-center">
         <h1 class="text-center">Friends: Don't just make them, amass them.</h1>
         <a href="/myprofile">

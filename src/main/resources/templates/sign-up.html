@@ -5,7 +5,7 @@
     <div th:replace="~{common :: head}"></div>
 </head>
 <body>
-    <div th:replace="~{common :: header(${user})}"></div>
+    <div th:replace="~{common :: header(${loggedInUser})}"></div>
     <div class="container">
         <form method="POST" action="/signup" >
             <label>First Name

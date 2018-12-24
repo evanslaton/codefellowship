@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Auth and Auth</title>
+    <div th:replace="~{common :: head}"></div>
+</head>
+<body>
+    <div th:replace="~{common :: header(${loggedInUser})}"></div>
+    <div class="container">
+
+        <ul>
+            <li th:each="post : ${posts}">
+                <p th:text="${'Written by: ' + post.applicationUser.username + ' on ' + post.createdAt}"></p>
+                <!--<p th:text="${post.createdAt}"></p>-->
+                <p th:text="${post.body}"></p>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
