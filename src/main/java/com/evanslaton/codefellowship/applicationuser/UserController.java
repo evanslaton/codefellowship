@@ -42,7 +42,7 @@ public class UserController {
     }
 
     // Creates a new users, logs that user in and redirects that user to /profile/{userId}
-    @RequestMapping(value="/signup", method= RequestMethod.POST)
+    @RequestMapping(value="c", method= RequestMethod.POST)
     public RedirectView signUpUser(@RequestParam String firstName,
                                    @RequestParam String lastName,
                                    @RequestParam String dateOfBirth,
@@ -80,10 +80,17 @@ public class UserController {
 
     // Serves the profile page of the user whose id = the userId path variable
     @RequestMapping(value="/user/{userId}", method= RequestMethod.GET)
-    public String viewProfile(@PathVariable long userId,
-                              Model m) {
+    public String viewProfile(@PathVariable long userId, Model m) {
         m.addAttribute("user", applicationUserRepo.findById(userId).get());
         return "profile";
+    }
+
+    // Serves a page the display all the users
+    @RequestMapping(value="/all-users", method= RequestMethod.GET)
+    public String viewProfile(Principal p, Model m) {
+        getUsername(p, m);
+        m.addAttribute("allUsers", applicationUserRepo.findAll());
+        return "users";
     }
 
    public void getUsername(Principal p, Model m) {

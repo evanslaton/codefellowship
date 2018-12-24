@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Auth and Auth</title>
+    <div th:replace="~{common :: head}"></div>
+</head>
+<body>
+    <div th:replace="~{common :: header(${user})}"></div>
+
+    <h1>All Users:</h1>
+
+    <ul>
+        <li th:each="user : ${allUsers}" >
+            <a th:href="${'/user/' + user.id}" th:text="${user.firstName + ' ' + user.lastName}"></a>
+            <p th:text="${user.bio}"></p>
+        </li>
+    </ul>
+</body>
+</html>
